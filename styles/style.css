@@ -1,0 +1,83 @@
+html, body { height:100%; width: 100%; }
+body {
+    margin: 0;
+    background-image: url("../image/background.jpg")  ;
+    background-size: cover;
+}
+
+#mainBlock{
+    position: relative;
+    display: flex;
+    z-index: 1;
+    height: 100%;
+    width: 80%;
+    margin-left: 10%;
+    margin-right: 10%;
+    background: none;
+    text-align: center;
+    background-color: rgba(210, 177, 30, 0.384);
+    box-shadow: 0  0 700px black;
+    border: solid 3px rgb(107, 69, 13);
+}
+
+#leftPanel{
+ height: 96%;
+ width: 28%;
+ border: solid 3px rgb(107, 51, 13);
+ border-radius: 20px;
+ margin-left: 4px;
+ margin-top: auto;
+ margin-bottom: auto;
+}
+
+#gamePanel {
+  width: 42%;
+  height: 96%;
+  border: solid 3px rgb(107, 51, 13);
+  border-radius: 20px;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: auto;
+ margin-bottom: auto;
+}
+
+#rightPanel {
+  width: 28%;
+  height: 96%;
+  border: solid 3px rgb(107, 51, 13);
+  border-radius: 20px;
+  margin-right: 4px;
+  margin-top: auto;
+  margin-bottom: auto;
+}
+
+.ownTable{
+  background-color: rgba(165, 42, 42, 0.521);
+}
+
+.ownLi{
+ background-color: rgba(222, 184, 135, 0.651);
+ height: 8.5%;
+ border-radius: 20px;
+ border: solid 1px rgb(43, 25, 13);
+ list-style: none;
+ margin-bottom: 0.2em;
+ margin-top: 0.2em;
+}
+
+.contentLi{
+  float: left;
+  padding: 7px;
+  display: flex;
+}
+
+#sumFirstUser, #sumSecondUser{
+  font-size: xx-large;
+}
+
+.score{
+  display: flex;
+  font-size: xx-large;
+}
+
+
