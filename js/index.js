@@ -5,10 +5,38 @@ let statusCub = [false, false, false, false, false,
                  false, false, false, false, false]
 let chances = 3
 let chancesCounter = 0
+let moveCurrent = null
+let leftComb = []
+let rightComb = []
 
 let upCub = document.getElementById('up')
 upCub.addEventListener("click", funcUp)
 
+let groupCub = document.getElementById('group')
+groupCub.addEventListener("click" , letGroup)
+
+let resultComb = document.getElementById('result')
+resultComb.addEventListener("click", resultShow)
+
+function resultShow(){
+    console.log('leftComb')
+    for(let i =0; i < numberCubs/2 ; i++){
+       console.log(leftComb[i])
+    }
+    console.log('rightComb')
+    for(let i =0; i < numberCubs/2 ; i++){
+       console.log(rightComb[i])
+    }
+}
+
+function letGroup(){
+    upCub.disabled = true
+    for(let i =0; i < numberCubs; i++){
+        let a = i+1
+        let current = '#cub'+a
+        document.querySelector(current).classList.remove("chooseCub")
+    }
+}
 
 
 choose()
@@ -17,7 +45,23 @@ function choose(){
         let a = i+1
         let current = 'cub'+a
         let test = document.getElementById(current)
+        let placeC = document.getElementById('place'+a)
         test.addEventListener("click", function(){chooseCub(a)})
+        test.addEventListener("click", function(){moveC(a)})
+        placeC.addEventListener("click", function(){moveTo(a)})
+    }
+}
+
+function moveTo(i){
+    let cubMove = document.getElementById('place'+i)
+    cubMove.innerHTML = '<img  src="./image/cub'+setCubs[moveCurrent-1]+'.png" style="width: 46px;">'
+    let current = 'cub'+moveCurrent
+    let test = document.getElementById(current)
+    test.innerHTML = ''
+    if(i < 5 || i === 5){
+      leftComb.push(setCubs[moveCurrent-1])
+    }else{
+      rightComb.push(setCubs[moveCurrent-1])
     }
 }
 
@@ -27,6 +71,7 @@ c1.addEventListener("click",  function(){
 })*/
 
 function chooseCub(i){
+   if(upCub.disabled === false){
     let a = '#cub'+i
     if(statusCub[i-1]===true){
     document.querySelector(a).classList.remove("chooseCub")
@@ -38,6 +83,16 @@ function chooseCub(i){
     }else{
         statusCub[i-1]=true
     }
+   }
+}
+
+function moveC(i){
+    if(upCub.disabled === true){
+        let a = '#cub'+i
+        document.querySelector(a).classList.toggle("moveCub")
+        moveCurrent = i
+       }
+    
 }
 
 function funcUp(){

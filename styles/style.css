@@ -104,6 +104,7 @@ display: flex;
   margin-left: 37px;
   margin-right: 37px;
   margin-top: 5px;
+  cursor: pointer;
  }
 
 .score{
@@ -161,6 +162,19 @@ display: flex;
   font-size: xx-large;
 }
 
+#group{
+  position: fixed;
+  margin-top: 50px;
+  margin-left: -5%;
+  height: 60px;
+  width: 150px;
+  font-size: xx-large;
+}
+
 .chooseCub{
   border: outset 5px green ;
+}
+
+.moveCub{
+  border: outset 5px rgb(182, 58, 58) ;
 }
