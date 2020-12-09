@@ -75,9 +75,92 @@ body {
   font-size: xx-large;
 }
 
+#firstLine, #secondLine{
+display: flex;
+
+}
+
+.cub {
+ height: 50px;
+ width: 50px;
+ background-color: coral;
+ border: solid 2px black;
+ margin: 2px;
+ z-index: 4;
+ margin: auto;
+ margin-top: 20px;
+ margin-bottom: 5px;
+ cursor: pointer;
+ outline: none;
+}
+
+.cubPlace {
+  height: 50px;
+  width: 50px;
+  background-color: coral;
+  border: solid 2px black;
+  margin: 2px;
+  z-index: 2;
+  margin-left: 37px;
+  margin-right: 37px;
+  margin-top: 5px;
+ }
+
 .score{
   display: flex;
   font-size: xx-large;
 }
 
+#dice{
+ margin-top: 8px;
+}
 
+#up{
+  width: 100px;
+  font-size: large;
+}
+
+#table{
+  height: 30%;
+  width: 95%;
+  border:solid 2px rgb(73, 53, 16);
+  border-radius: 20px;
+  margin: auto;
+  background-image: url("../image/backGame.jpg")  ;
+  background-size: cover;
+}
+
+#userIcon{
+  height: 28%;
+}
+
+#avatar1{
+  float: left;
+  margin: 10px;
+}
+
+#avatar2{
+  float: right;
+  margin: 10px;
+}
+
+#leftGroup{
+  float: left;
+}
+
+#rightGroup{
+  float: right;
+}
+
+#result{
+  position: fixed;
+  margin-top: 150px;
+  margin-left: -5%;
+  height: 60px;
+  width: 150px;
+  font-size: xx-large;
+}
+
+.chooseCub{
+  border: outset 5px green ;
+}
