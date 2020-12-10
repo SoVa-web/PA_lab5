@@ -13,7 +13,35 @@ let userNumber = 1 //1 - user, 2 - computer
 let score1 = 0
 let score2 = 0
 
-let combName = ['one', 'two', 'three', 'four', 'five', 'six', 'f', 'small', 'big', 'like']
+let counterStep = 0
+
+let combName = ['1', '2', '3', '4', '5', '6', 'Small', 'Big','F',  'Like']
+function addLis(){
+    for(let i =0; i < numberCubs; i++){
+        document.getElementById('left'+combName[i]).addEventListener("click", function(){addScore('left'+combName[i], i)})
+        document.getElementById('left'+combName[i]+combName[i]).addEventListener("click", function(){addScore('left'+combName[i]+combName[i], i)})
+        document.getElementById('right'+combName[i]).addEventListener("click",function(){ addScore('right'+combName[i], i)})
+        document.getElementById('right'+combName[i]+combName[i]).addEventListener("click", function(){addScore('right'+combName[i]+combName[i], i)})
+    }
+}
+addLis()
+
+function addScore(str, i){
+    if(userNumber === 1){
+        score1 = score1+document.getElementById(str).innerHTML*1
+        document.getElementById('suma1').innerHTML = ''
+        document.getElementById('suma1').innerHTML = score1
+        let a = i+1
+        document.querySelector('#comb1'+a).classList.toggle('red')
+    }else{
+        score2= score2 + document.getElementById(str).innerHTML*1
+        document.getElementById('suma2').innerHTML = ''
+        document.getElementById('suma2').innerHTML = score2
+        let a = i+1
+        document.querySelector('#comb2'+a).classList.toggle('red')
+    }
+}
+
 
 let template =  {
     left : 0,
@@ -83,9 +111,9 @@ function calcScore(){
         document.getElementById('leftSmall').innerHTML=  checkSmall(leftComb)
         userRes.small.right =  checkSmall(rightComb)
         document.getElementById('leftSmallSmall').innerHTML=  checkSmall(rightComb)
-        userRes.small.left =  checkBig(leftComb)
+        userRes.big.left =  checkBig(leftComb)
         document.getElementById('leftBig').innerHTML=  checkBig(leftComb)
-        userRes.small.right =  checkBig(rightComb)
+        userRes.big.right =  checkBig(rightComb)
         document.getElementById('leftBigBig').innerHTML=  checkBig(rightComb)
         userRes.like.left = checkLike(leftComb)
         document.getElementById('leftLike').innerHTML= checkLike(leftComb)
@@ -93,27 +121,46 @@ function calcScore(){
         document.getElementById('leftLikeLike').innerHTML = checkLike(rightComb)
     }else{
         compOp.one.left =  calc(leftComb, 1)
+        document.getElementById('right1').innerHTML = calc(leftComb, 1)
         compOp.one.right =  calc(rightComb, 1)
+        document.getElementById('right11').innerHTML = calc(rightComb, 1)
         compOp.two.left =  calc(leftComb, 2)
+        document.getElementById('right2').innerHTML = calc(leftComb, 2)
         compOp.two.right =  calc(rightComb, 2)
+        document.getElementById('right22').innerHTML = calc(rightComb, 2)
         compOp.three.left =  calc(leftComb, 3)
+        document.getElementById('right3').innerHTML = calc(leftComb, 3)
         compOp.three.right =  calc(rightComb, 3)
+        document.getElementById('right33').innerHTML = calc(rightComb, 3)
         compOp.four.left =  calc(leftComb, 4)
+        document.getElementById('right4').innerHTML = calc(leftComb, 4)
         compOp.four.right =  calc(rightComb, 4)
+        document.getElementById('right44').innerHTML = calc(rightComb, 4)
         compOp.five.left =  calc(leftComb, 5)
+        document.getElementById('right5').innerHTML =  calc(leftComb, 5)
         compOp.five.right =  calc(rightComb, 5)
+        document.getElementById('right55').innerHTML =  calc(rightComb, 5)
         compOp.six.left =  calc(leftComb, 6)
+        document.getElementById('right6').innerHTML=  calc(leftComb, 6)
         compOp.six.right =  calc(rightComb, 6)
+        document.getElementById('right66').innerHTML=  calc(rightComb, 6)
         compOp.f.left =  checkF(leftComb)
+        document.getElementById('rightF').innerHTML =  checkF(leftComb)
         compOp.f.right =  checkF(rightComb)
+        document.getElementById('rightFF').innerHTML=  checkF(rightComb)
+        compOp.big.left =  checkBig(leftComb)
+        document.getElementById('rightBig').innerHTML=  checkBig(leftComb)
+        compOp.big.right =  checkBig(rightComb)
+        document.getElementById('rightBigBig').innerHTML=  checkBig(rightComb)
         compOp.small.left =  checkSmall(leftComb)
+        document.getElementById('rightSmall').innerHTML=  checkSmall(leftComb)
         compOp.small.right =  checkSmall(rightComb)
-        compOp.small.left =  checkSmall(leftComb)
-        compOp.small.right =  checkSmall(rightComb)
+        document.getElementById('rightSmallSmall').innerHTML=  checkSmall(rightComb)
         compOp.like.left = checkLike(leftComb)
+        document.getElementById('rightLike').innerHTML= checkLike(leftComb)
         compOp.like.right = checkLike(rightComb)
+        document.getElementById('leftLikeLike').innerHTML = checkLike(rightComb)
     }
-    
 }
 
 function resultShow(){
@@ -122,8 +169,8 @@ function resultShow(){
         let place = document.getElementById('place'+i)
         place.innerHTML = ''
     }
-    leftComb.length = 0
-    rightComb.length = 0
+    leftComb = []
+    rightComb = []
     console.log(userNumber)
     document.querySelector('#avatar'+userNumber).classList.toggle('user'+userNumber)
     chancesCounter = 0
@@ -134,6 +181,18 @@ function resultShow(){
             userNumber = 1 
             document.querySelector('#avatar'+userNumber).classList.toggle('user'+userNumber)
         }
+    counterStep++
+    if(counterStep === numberCubs){
+        if(score1>score2){
+            alert("Користувач виграв")
+        }
+        if(score1===score2){
+            alert("Нічия")
+        }
+        if(score1<score2){
+            alert("Комп'ютер виграв !")
+        }
+    }
 }
 window.addEventListener("load",function(){ document.querySelector('#avatar'+userNumber).classList.toggle('user'+userNumber)})
 
@@ -245,6 +304,7 @@ function calc(arr, numinal){
 }
 
 function checkLike(arr){
+    let numberOne = 0
     for(let i =0;i < numberCubs/2; i++){
         if(arr[i] === arr[0]){
             numberOne++
@@ -337,6 +397,11 @@ function checkBig(arr){
     }
     if(two===1&&three===1&&four===1&&five===1&&six===1){
         return 30
+        if(userNumber===1){
+            alert("Користувач переміг !")
+        }else{
+            alert("Комп`ютер переміг !")
+        }
     }else{
         return 0
     }

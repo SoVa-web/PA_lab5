@@ -196,3 +196,13 @@ display: flex;
   margin: 10px;
   font-size: large;
 }
+.red{
+  background-color: hotpink;
+}
+
+#left1, #left11, #left2, #left22, #left3, #left33, #left4, #left44, #left5, #left55, #left6, #left66,
+#leftF, #leftFF, #leftSmall, #leftSmallSmall, #leftBig, #leftBigBig, #leftLike, #leftLikeLike,
+#right1, #right11, #right2, #right22, #right3, #right33, #right4, #right44, #right5, #right55, #right6, #right66,
+#rightF, #rightFF, #rightSmall, #rightSmallSmall, #rightBig, #rightBigBig, #rightLike, #rightLikeLike{
+  cursor: pointer;
+}
