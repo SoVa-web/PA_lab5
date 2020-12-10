@@ -14,7 +14,7 @@
              <img  src="./image/cub1.png" style="width: 45px;">
            </div>
            <div class="score">
-            <p >= 1*x</p>
+            <p id="left1">= 0</p><p>|</p><p id="left11">0</p>
           </div>
          </li>
          <li id="comb12" class=" ownLi">
@@ -22,7 +22,7 @@
             <img  src="./image/cub2.png" style="width: 45px;">
           </div>
           <div class="score">
-            <p >= 2*x</p>
+            <p id="left2">= 0</p><p>|</p><p id="left22">0</p>
           </div>
          </li>
          <li id="comb13" class=" ownLi">
@@ -30,7 +30,7 @@
             <img  src="./image/cub3.png" style="width: 45px;">
           </div>
           <div class="score">
-            <p >= 3*x</p>
+            <p id="left3">= 0</p><p>|</p><p id="left33">0</p>
           </div>
          </li>
          <li id="comb14" class=" ownLi">
@@ -38,7 +38,7 @@
             <img  src="./image/cub4.png" style="width: 45px;">
           </div>
           <div class="score">
-            <p >= 4*x</p>
+            <p id="left4">= 0</p><p>|</p><p id="left44">0</p>
           </div>
          </li>
          <li id="comb15" class=" ownLi">
@@ -46,7 +46,7 @@
             <img  src="./image/cub5.png" style="width: 45px;">
           </div>
           <div class="score">
-            <p >= 5*x</p>
+            <p id="left5">= 0</p><p>|</p><p id="left55">0</p>
           </div>
          </li>
          <li id="comb16" class=" ownLi">
@@ -54,7 +54,7 @@
             <img  src="./image/cub6.png" style="width: 45px;">
           </div>
           <div class="score">
-            <p >= 6*x</p>
+            <p id="left6">= 0</p><p>|</p><p id="left66">0</p>
           </div>
          </li>
          <li id="comb17" class=" ownLi">
@@ -66,7 +66,7 @@
             <img  src="./image/cub5.png" style="width: 35px;">
           </div>
           <div class="score">
-            <p >= 21</p>
+            <p id="leftSmall">= 0</p><p>|</p><p id="leftSmallSmall">0</p>
           </div>
          </li>
          <li id="comb18" class=" ownLi">
@@ -78,7 +78,7 @@
             <img  src="./image/cub6.png" style="width: 35px;">
           </div>
           <div class="score">
-            <p >= 30</p>
+            <p id="leftBig">= 0</p><p>|</p><p id="leftBigBig">0</p>
           </div>
          </li>
          <li id="comb19" class=" ownLi">
@@ -90,7 +90,7 @@
             <img  src="./image/cub3.png" style="width: 35px;">
           </div>
           <div class="score">
-            <p >= 3*x + 2*y</p>
+            <p id="leftF">= 0</p><p>|</p><p id="leftFF">0</p>
           </div>
          </li>
          <li id="comb110" class=" ownLi">
@@ -102,7 +102,7 @@
             <img  src="./image/cub3.png" style="width: 35px;">
           </div>
           <div class="score">
-            <p >= 50</p>
+            <p id="leftLike">= 0</p><p>|</p><p id="leftLikeLike">0</p>
           </div>
          </li>
          <li id="sum1" class=" ownLi">
@@ -110,19 +110,19 @@
             <p id="sumFirstUser">SUM</p>
            </div>
            <div class="score">
-            <p >= 0</p>
+            <p id="sum1">= 0</p>
           </div>
          </li>
        </div>
        <div id="gamePanel">
          <div id="userIcon">
            <div id="avatar1">
-             <img src="./image/userGirl.jpg" style="width: 120px; height: 130px;">
-             <p>user 1</p>
+             <img src="./image/userGirl.jpg" style="width: 110px; height: 120px;">
+             <p>User</p>
            </div>
            <div id="avatar2">
-             <img src="./image/compOponent.png" style="width: 120px; height: 130px;">
-             <p>comp oponent</p>
+             <img src="./image/compOponent.png" style="width: 110px; height: 120px;">
+             <p>Comp oponent</p>
            </div>
           </div>
          <div id="table">
@@ -144,14 +144,20 @@
              <button id="up" class="btn btn-outline-warning">
                Up!
              </button>
+             <p id="coun">
+              You made 0 dice rolls!
+             </p>
            </div>
          </div>
          <div id="combGroup">
            <button id="group" class="btn btn-outline-warning">
             Group!
            </button>
+           <button id="score" class="btn btn-outline-warning">
+             Score!
+           </button>
            <button id="result" class="btn btn-outline-warning">
-             Result!
+             Next player!!
            </button>
            <div id="leftGroup">
             <div id="place1" class="cubPlace"></div>
@@ -175,7 +181,7 @@
             <img  src="./image/cub1.png" style="width: 45px;">
           </div>
           <div class="score">
-            <p >= 1*x</p>
+            <p id="right1">= 0</p><p>|</p><p id="right11">0</p>
           </div>
         </li>
         <li id="comb22" class=" ownLi">
@@ -183,7 +189,7 @@
             <img  src="./image/cub2.png" style="width: 45px;">
           </div>
           <div class="score">
-            <p >= 2*x</p>
+            <p id="right2">= 0</p><p>|</p><p id="right22">0</p>
           </div>
         </li>
         <li id="comb23" class=" ownLi">
@@ -191,7 +197,7 @@
             <img  src="./image/cub3.png" style="width: 45px;">
           </div>
           <div class="score">
-            <p >= 3*x</p>
+            <p id="right3">= 0</p><p>|</p><p id="right33">0</p>
           </div>
         </li>
         <li id="comb24" class=" ownLi">
@@ -199,7 +205,7 @@
             <img  src="./image/cub4.png" style="width: 45px;">
           </div>
           <div class="score">
-            <p >= 4*x</p>
+            <p id="right4">= 0</p><p>|</p><p id="right44">0</p>
           </div>
         </li>
         <li id="comb25" class=" ownLi">
@@ -207,7 +213,7 @@
             <img  src="./image/cub5.png" style="width: 45px;">
           </div>
           <div class="score">
-            <p >= 5*x</p>
+            <p id="right5">= 0</p><p>|</p><p id="right55">0</p>
           </div>
         </li>
         <li id="comb26" class=" ownLi">
@@ -215,7 +221,7 @@
             <img  src="./image/cub6.png" style="width: 45px;">
           </div>
           <div class="score">
-            <p >= 6*x</p>
+            <p id="right6">= 0</p><p>|</p><p id="right66">0</p>
           </div>
         </li>
         <li id="comb27" class=" ownLi">
@@ -227,7 +233,7 @@
             <img  src="./image/cub5.png" style="width: 35px;">
           </div>
           <div class="score">
-            <p >= 21</p>
+            <p id="rightSmall">= 0</p><p>|</p><p id="rightSmallSmall">0</p>
           </div>
         </li>
         <li id="comb28" class=" ownLi">
@@ -239,7 +245,7 @@
               <img  src="./image/cub6.png" style="width: 35px;">
             </div>
             <div class="score">
-              <p >= 30</p>
+              <p id="rightBig">= 0</p><p>|</p><p id="rightBigBig">0</p>
             </div>
         </li>
         <li id="comb29" class=" ownLi">
@@ -251,7 +257,7 @@
             <img  src="./image/cub3.png" style="width: 35px;">
           </div>
           <div class="score">
-            <p >= 3*x + 2*y</p>
+            <p id="rightF">= 0</p><p>|</p><p id="rightFF">0</p>
           </div>
         </li>
         <li id="comb210" class=" ownLi">
@@ -263,7 +269,7 @@
             <img  src="./image/cub3.png" style="width: 35px;"> 
           </div>
           <div class="score">
-            <p >= 50</p>
+            <p id="rightLike">= 0</p><p>|</p><p id="rightLikeLike">0</p>
           </div>
         </li>
         <li id="sum2" class=" ownLi">
@@ -271,7 +277,7 @@
             <p id="sumSecondUser">SUM</p>
            </div>
            <div class="score">
-            <p >= 0</p>
+            <p id="sum2">= 0</p>
           </div>
         </li>
        </div>

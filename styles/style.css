@@ -155,11 +155,20 @@ display: flex;
 
 #result{
   position: fixed;
-  margin-top: 150px;
+  margin-top: 200px;
   margin-left: -5%;
   height: 60px;
   width: 150px;
-  font-size: xx-large;
+  font-size: x-large;
+}
+
+#score{
+  position: fixed;
+  margin-top: 130px;
+  margin-left: -5%;
+  height: 60px;
+  width: 150px;
+  font-size: x-large;
 }
 
 #group{
@@ -177,4 +186,13 @@ display: flex;
 
 .moveCub{
   border: outset 5px rgb(182, 58, 58) ;
+}
+
+.user1, .user2{
+  border: inset 5px green;
+}
+
+#coun{
+  margin: 10px;
+  font-size: large;
 }
