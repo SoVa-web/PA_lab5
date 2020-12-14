@@ -216,13 +216,13 @@ function resultShow(){
     rightComb = []
     document.querySelector('#avatar'+userNumber).classList.toggle('user'+userNumber)
     chancesCounter = 0
-        if(userNumber === 1){
+        //if(userNumber === 1){
             userNumber = 2
             document.querySelector('#avatar'+userNumber).classList.toggle('user'+userNumber)
-        }else{
+       /* }else{
             userNumber = 1 
             document.querySelector('#avatar'+userNumber).classList.toggle('user'+userNumber)
-        }
+        }*/
     counterStep++
     if(counterStep === numberCubs){
         if(score1>score2){
@@ -577,7 +577,7 @@ function evalLikeForTen(){
     }
 }
 
-async function eval(){
+ async function eval(){
     if(userNumber === 2){
         funcUp()
         if(evalBigForTen() === true){
@@ -599,10 +599,10 @@ async function eval(){
                     }
                     let c = document.getElementById('coun')
                      c.innerHTML = ' You made '+chancesCounter+' dice rolls!'
-                     await sleep(5000)
+                     //await sleep(5000)
                      funcUp()
                      c.innerHTML = ' You made '+chancesCounter+' dice rolls!'
-                     await sleep(5000)
+                     //await sleep(5000)
                      if(evalBigForTen() === true){
                          groupingForComp()
                      }else{
@@ -629,8 +629,6 @@ async function eval(){
      }
 }
 async function strategyComp(){
-    
-    if(userNumber === 2){
         leftComb.length=0
         rightComb.length=0
        funcUp()
@@ -677,13 +675,13 @@ async function strategyComp(){
     rightComb = []
     document.querySelector('#avatar'+userNumber).classList.toggle('user'+userNumber)
     chancesCounter = 0
-        if(userNumber === 1){
+       /* if(userNumber === 1){
             userNumber = 2
             document.querySelector('#avatar'+userNumber).classList.toggle('user'+userNumber)
-        }else{
+        }else{*/
             userNumber = 1 
             document.querySelector('#avatar'+userNumber).classList.toggle('user'+userNumber)
-        }
+        //}
     counterStep++
     if(counterStep === numberCubs){
         if(score1>score2){
@@ -696,31 +694,30 @@ async function strategyComp(){
             alert("Комп'ютер виграв !")
         }
     }
-    }else{
-        return
-    }
-   
 }
 
 function addCompScore(){
     let add1 = 0, add2 = 0
     let max1 = 0, max2  = 0
     for(let i =0; i < numberCubs; i ++){
-       if(compUsed[i] === false && document.getElementById('right1').innerHTML*1 > max1) {add1=1; max1=document.getElementById('right1').innerHTML*1}
-       if(compUsed[i]  === false && document.getElementById('right2').innerHTML*1 > max1) {add1=2; max1=document.getElementById('right2').innerHTML*1}
-       if(compUsed[i]  === false && document.getElementById('right3').innerHTML*1 > max1) {add1=3; max1=document.getElementById('right3').innerHTML*1}
-       if(compUsed[i]  === false && document.getElementById('right4').innerHTML*1 > max1) {add1=4; max1=document.getElementById('right4').innerHTML*1}
-       if(compUsed[i]  === false && document.getElementById('right5').innerHTML*1 > max1) {add1=5; max1=document.getElementById('right5').innerHTML*1}
-       if(compUsed[i]  === false && document.getElementById('right6').innerHTML*1 > max1) {add1=6; max1=document.getElementById('right6').innerHTML*1}
-       if(compUsed[i]  === false && document.getElementById('rightSmall').innerHTML*1 > max1) {add1=7; max1=document.getElementById('rightSmall').innerHTML*1}
-       if(compUsed[i]  === false && document.getElementById('rightBig').innerHTML*1 > max1) {add1=8; max1=document.getElementById('rightBig').innerHTML*1}
-       if(compUsed[i] === false && document.getElementById('rightF').innerHTML*1 > max1) {add1=9;  max1=document.getElementById('rightF').innerHTML*1}
-       if(compUsed[i]  === false && document.getElementById('rightLike').innerHTML*1 > max1) {add1=10; max1=document.getElementById('rightLike').innerHTML*1}
-       score2 = score2+max1
+       if(compUsed[i] === false && document.getElementById('right1').innerHTML*1 >= max1) {add1=1; max1=document.getElementById('right1').innerHTML*1}
+       if(compUsed[i]  === false && document.getElementById('right2').innerHTML*1 >= max1) {add1=2; max1=document.getElementById('right2').innerHTML*1}
+       if(compUsed[i]  === false && document.getElementById('right3').innerHTML*1 >= max1) {add1=3; max1=document.getElementById('right3').innerHTML*1}
+       if(compUsed[i]  === false && document.getElementById('right4').innerHTML*1 >= max1) {add1=4; max1=document.getElementById('right4').innerHTML*1}
+       if(compUsed[i]  === false && document.getElementById('right5').innerHTML*1 >= max1) {add1=5; max1=document.getElementById('right5').innerHTML*1}
+       if(compUsed[i]  === false && document.getElementById('right6').innerHTML*1 >= max1) {add1=6; max1=document.getElementById('right6').innerHTML*1}
+       if(compUsed[i]  === false && document.getElementById('rightSmall').innerHTML*1 >= max1) {add1=7; max1=document.getElementById('rightSmall').innerHTML*1}
+       if(compUsed[i]  === false && document.getElementById('rightBig').innerHTML*1 >= max1) {add1=8; max1=document.getElementById('rightBig').innerHTML*1}
+       if(compUsed[i] === false && document.getElementById('rightF').innerHTML*1 >= max1) {add1=9;  max1=document.getElementById('rightF').innerHTML*1}
+       if(compUsed[i]  === false && document.getElementById('rightLike').innerHTML*1 >= max1) {add1=10; max1=document.getElementById('rightLike').innerHTML*1}
+    }
+       score2 = score2*1+max1*1
        document.getElementById('suma2').innerHTML = ''
-       document.getElementById('suma2').innerHTML = score2
+       document.getElementById('suma2').innerHTML =`${score2}`
+       console.log("add"+add1)
        document.querySelector('#comb2'+add1).classList.add('red')
        compUsed[add1*1-1] = true
+       for(let i =0; i < numberCubs; i ++){
        if(compUsed[i]  === false && document.getElementById('right11').innerHTML*1 > max2) {add2=1; max2=document.getElementById('right11').innerHTML*1}
        if(compUsed[i]  === false && document.getElementById('right22').innerHTML*1 > max2) {add2=2;max2=document.getElementById('right22').innerHTML*1}
        if(compUsed[i]  === false && document.getElementById('right33').innerHTML*1 > max2) {add2=3;max2=document.getElementById('right33').innerHTML*1}
@@ -731,12 +728,15 @@ function addCompScore(){
        if(compUsed[i]  === false && document.getElementById('rightBigBig').innerHTML*1 > max2) {add2=8;max2=document.getElementById('rightBigBig').innerHTML*1}
        if(compUsed[i]  === false && document.getElementById('rightFF').innerHTML*1 > max2) {add2=9;max2=document.getElementById('rightFF').innerHTML*1}
        if(compUsed[i]  === false && document.getElementById('rightLikeLike').innerHTML*1 > max2) {add2=10;max2=document.getElementById('rightLikeLike').innerHTML*1}
-       compUsed[add2*1-1] = true
-       score2 = score2+max2
-       document.getElementById('suma2').innerHTML = ''
-       document.getElementById('suma2').innerHTML = score2
-       document.querySelector('#comb2'+add2).classList.add('red')
+       
     }
+       compUsed[add2*1-1] = true
+       score2 = score2*1+max2*1
+       console.log("score")
+       console.log(score2)
+       document.getElementById('suma2').innerHTML = ''
+       document.getElementById('suma2').innerHTML =`${score2}`
+       document.querySelector('#comb2'+add2).classList.add('red')
 }
 
 function clearComp(){
@@ -747,7 +747,6 @@ function clearComp(){
 }
 
 function renderComp(){
-    console.log("hhhhh")
       for(let j =0; j < numberCubs/2; j++){
         let a = j +1
         document.getElementById('place'+a).innerHTML = '<img  src="./image/cub'+leftComb[j]+'.png" style="width: 46px;">'
@@ -769,8 +768,6 @@ function randomGroup(){
 }
 
 function groupingForComp(){
-    const number = 5
-    let counter = 0
     letGroup()
     if(evalBigForTen() === true){
         groupForBig()
@@ -791,6 +788,7 @@ function groupingForComp(){
 }
 
 function groupForBig(){
+    console.log("big")
     for(let i =0; i<numberCubs; i++){
         if(setCubs[i]===2 && groupStatus[i]===false){
            leftComb.push(setCubs[i])
@@ -840,6 +838,7 @@ function groupForBig(){
 }
 
 function groupForSmall(){
+    console.log("small")
     for(let i =0; i<numberCubs; i++){
         if(setCubs[i]===2 && groupStatus[i]===false){
            leftComb.push(setCubs[i])
@@ -885,6 +884,7 @@ function groupForSmall(){
 }
 
 function groupForLike(){
+    console.log("like")
     let count = 0
     let like = 0
     let one=0, two=0, three=0, four=0, five=0, six=0
@@ -918,6 +918,7 @@ function groupForLike(){
 }
 
 function groupForFull(){
+    console.log("full")
     let count1 = 0, count2 =0
     let like1 = null, like2 = null 
     let one=0, two=0, three=0, four=0, five=0, six=0
