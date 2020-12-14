@@ -1,8 +1,19 @@
 let numberCubs = 10
 let maxNominal = 6
 let setCubs = []
-let statusCub = [false, false, false, false, false,
-                 false, false, false, false, false]
+let statusCub = []
+let groupStatus = []
+let compUsed = []
+
+function init(arr, num){
+  for(let i =0; i<num; i++){
+      arr.push(false)
+  }
+}
+init(statusCub, numberCubs)
+init(groupStatus, numberCubs)
+init(compUsed, numberCubs)
+
 let chances = 3
 let chancesCounter = 0
 let moveCurrent = null
@@ -31,15 +42,47 @@ function addScore(str, i){
         score1 = score1+document.getElementById(str).innerHTML*1
         document.getElementById('suma1').innerHTML = ''
         document.getElementById('suma1').innerHTML = score1
+        document.getElementById(str).hidden = true
+        if(str === 'left'+combName[i]){
+            document.getElementById(str+combName[i]).hidden = true
+        }else{
+            document.getElementById('left'+combName[i]).hidden = true
+        }
         let a = i+1
-        document.querySelector('#comb1'+a).classList.toggle('red')
-    }else{
+        document.querySelector('#comb1'+a).classList.add('red')
+        if(combName[i]==='1')userRes.one.used = true
+        if(combName[i]==='2')userRes.two.used = true
+        if(combName[i]==='3')userRes.three.used = true
+        if(combName[i]==='4')userRes.four.used = true
+        if(combName[i]==='5')userRes.five.used = true
+        if(combName[i]==='6')userRes.six.used = true
+        if(combName[i]==='Small')userRes.small.used = true
+        if(combName[i]==='Big')userRes.big.used = true
+        if(combName[i]==='F')userRes.f.used = true
+        if(combName[i]==='Like')userRes.like.used = true
+    }/*else{
         score2= score2 + document.getElementById(str).innerHTML*1
         document.getElementById('suma2').innerHTML = ''
         document.getElementById('suma2').innerHTML = score2
         let a = i+1
-        document.querySelector('#comb2'+a).classList.toggle('red')
-    }
+        document.getElementById(str).hidden = true
+        if(str === 'right'+combName[i]){
+            document.getElementById(str+combName[i]).hidden = true
+        }else{
+            document.getElementById('right'+combName[i]).hidden = true
+        }
+        document.querySelector('#comb2'+a).classList.add('red')
+        if(combName[i]==='1')compOp.one.used = true
+        if(combName[i]==='2')compOp.two.used = true
+        if(combName[i]==='3')compOp.three.used = true
+        if(combName[i]==='4')compOp.four.used = true
+        if(combName[i]==='5')compOp.five.used = true
+        if(combName[i]==='6')compOp.six.used = true
+        if(combName[i]==='Small')compOp.small.used = true
+        if(combName[i]==='Big')compOp.big.used = true
+        if(combName[i]==='F')compOp.f.used = true
+        if(combName[i]==='Like')compOp.like.used = true
+    }*/
 }
 
 
@@ -171,7 +214,6 @@ function resultShow(){
     }
     leftComb = []
     rightComb = []
-    console.log(userNumber)
     document.querySelector('#avatar'+userNumber).classList.toggle('user'+userNumber)
     chancesCounter = 0
         if(userNumber === 1){
@@ -193,9 +235,10 @@ function resultShow(){
             alert("Комп'ютер виграв !")
         }
     }
+    strategyComp()
+    
 }
 window.addEventListener("load",function(){ document.querySelector('#avatar'+userNumber).classList.toggle('user'+userNumber)})
-
 
 function letGroup(){
     upCub.disabled = true
@@ -218,7 +261,6 @@ function choose(){
         placeC.addEventListener("click", function(){moveTo(a)})
     }
 }
-
 function moveTo(i){
    if(upCub.disabled === true){
     let cubMove = document.getElementById('place'+i)
@@ -235,7 +277,6 @@ function moveTo(i){
         document.querySelector(a).classList.remove("moveCub")
    }
 }
-
 function chooseCub(i){
    if(upCub.disabled === false){
     let a = '#cub'+i
@@ -310,7 +351,7 @@ function checkLike(arr){
             numberOne++
         }
       }
-    if(numberOne===5){
+    if(numberOne===5&&userRes.like.used === false){
         return 50
     }else{
         return 0
@@ -340,12 +381,15 @@ function checkF(arr){
             six++
         }
     }
-    if((one===3|| two===3|| three===3||four===3||five===3||six===3)&&(one===2|| two===2|| three===2||four===2||five===2||six===2)){
+    if((one===3|| two===3|| three===3||four===3||five===3||six===3)&&(one===2|| two===2|| three===2||four===2||five===2||six===2)&&userRes.f.used === false){
         for(let i =0; i < numberCubs/2; i++){
             scoreF = scoreF+arr[i]
         }
+          return scoreF
+    }else{
+        return 0
     }
-    return scoreF
+  
 }
 
 function checkSmall(arr){
@@ -368,7 +412,7 @@ function checkSmall(arr){
             five++
         }
     }
-    if(one===1&&two===1&&three===1&&four===1&&five===1){
+    if(one===1&&two===1&&three===1&&four===1&&five===1&&userRes.small.used === false){
         return 21
     }else{
         return 0
@@ -395,16 +439,532 @@ function checkBig(arr){
             five++
         }
     }
-    if(two===1&&three===1&&four===1&&five===1&&six===1){
-        return 30
+    if(two===1&&three===1&&four===1&&five===1&&six===1&&userRes.big.used === false){
         if(userNumber===1){
             alert("Користувач переміг !")
         }else{
             alert("Комп`ютер переміг !")
         }
+         return 30
     }else{
         return 0
     }
 }
 
+function evalBigForTen(){
+    if(compOp.big.used === false){
+        let  two = 0, three = 0, four = 0, five = 0, six = 0
+    let scoreF = 0
+    for(let i =0; i < numberCubs; i++){
+        if(setCubs[i] === 2){
+            two++
+        }
+        if(setCubs[i] === 3){
+            three++
+        }
+        if(setCubs[i] === 4){
+            four++
+        }
+        if(setCubs[i] === 5){
+            five++
+        }
+        if(setCubs[i] === 6){
+            six++
+        }
+    }
+    if(six>=1 && two >= 1 && three>=1 && four>=1 && five>=1){
+        return true
+    }else{
+        return false
+    }
+    }
+    return false
+}
 
+function evalSmallForTen(){
+    if(compOp.small.used === false){
+        let  two = 0, three = 0, four = 0, five = 0, one = 0
+    let scoreF = 0
+    for(let i =0; i < numberCubs; i++){
+        if(setCubs[i] === 2){
+            two++
+        }
+        if(setCubs[i] === 3){
+            three++
+        }
+        if(setCubs[i] === 4){
+            four++
+        }
+        if(setCubs[i] === 5){
+            five++
+        }
+        if(setCubs[i] === 1){
+            one++
+        }
+    }
+    if(one>=1 && two >= 1 && three>=1 && four>=1 && five>=1){
+        return true
+    }else{
+        return false
+    }
+    }
+    return false
+}
+
+function evalFullForTen(){
+    if(compOp.f.used === false){
+        let one = 0, two =0, three =0, four =0, five =0, six =0
+    for(let i =0; i < numberCubs; i++){
+        if(setCubs[i] === 1){
+            one++
+        }
+        if(setCubs[i] === 2){
+            two++
+        }
+        if(setCubs[i] === 3){
+            three++
+        }
+        if(setCubs[i] === 4){
+            four++
+        }
+        if(setCubs[i] === 5){
+            five++
+        }
+        if(setCubs[i] === 6){
+            six++
+        }
+    }
+    if((one===3|| two===3|| three===3||four===3||five===3||six===3)&&(one===2|| two===2|| three===2||four===2||five===2||six===2)){
+       return true
+    }else{
+        return false
+    }
+    }else{
+        return false
+    }
+}
+
+function evalLikeForTen(){
+    if(compOp.like.used === false){
+       let one=0, two=0, three=0, four=0, five=0, six=0
+       for(let i=0; i<numberCubs; i++){
+        if(setCubs[i] === 1){
+            one++
+        }
+        if(setCubs[i] === 2){
+            two++
+        }
+        if(setCubs[i] === 3){
+            three++
+        }
+        if(setCubs[i] === 4){
+            four++
+        }
+        if(setCubs[i] === 5){
+            five++
+        }
+        if(setCubs[i] === 6){
+            six++
+        }
+       }
+       if(six>=5 && two >= 5 && three>=5 && four>=5 && five>=5 && one>=5){
+        return true
+    }else{
+        return false
+    }
+    }else{
+        return false
+    }
+}
+
+async function eval(){
+    if(userNumber === 2){
+        funcUp()
+        if(evalBigForTen() === true){
+            groupingForComp()
+        }else{
+         if(evalLikeForTen() === true){
+            groupingForComp()
+         }else{
+             if(evalFullForTen() === true){
+                groupingForComp()
+             }else{
+                  if(evalSmallForTen()=== true){
+                     groupingForComp()
+                  }else{
+                     leftComb.length = 0
+                    rightComb.length = 0
+                    for(let i =0; i < numberCubs; i++){
+                        groupStatus[i]= false
+                    }
+                    let c = document.getElementById('coun')
+                     c.innerHTML = ' You made '+chancesCounter+' dice rolls!'
+                     await sleep(5000)
+                     funcUp()
+                     c.innerHTML = ' You made '+chancesCounter+' dice rolls!'
+                     await sleep(5000)
+                     if(evalBigForTen() === true){
+                         groupingForComp()
+                     }else{
+                      if(evalLikeForTen() === true){
+                         groupingForComp()
+                      }else{
+                          if(evalFullForTen() === true){
+                             groupingForComp()
+                          }else{
+                               if(evalSmallForTen()=== true){
+                                  groupingForComp()
+                               }else{
+                                 randomGroup()
+                               }
+                          }
+                      }
+                     }
+                  }
+             }
+         }
+        }
+     }else{
+         return
+     }
+}
+async function strategyComp(){
+    
+    if(userNumber === 2){
+        leftComb.length=0
+        rightComb.length=0
+       funcUp()
+       if(evalBigForTen() === true){
+           groupingForComp()
+       }else{
+        if(evalLikeForTen() === true){
+           groupingForComp()
+        }else{
+            if(evalFullForTen() === true){
+               groupingForComp()
+            }else{
+                 if(evalSmallForTen()=== true){
+                    groupingForComp()
+                 }else{
+                    let c = document.getElementById('coun')
+                    c.innerHTML = ' You made '+chancesCounter+' dice rolls!'
+                    await sleep(5000);
+                    for(let i =0; i < numberCubs; i++){
+                        groupStatus[i]= false
+                    }
+                    leftComb.length = 0
+                    rightComb.length = 0
+                    eval()
+                 }
+            }
+        }
+       }
+        await sleep(5000)
+    clearComp()
+    renderComp()
+    calcScore()
+    addCompScore()
+    for(let i =0; i < numberCubs; i++){
+        groupStatus[i]= false
+    }
+    await sleep(5000)
+    upCub.disabled = false
+    for(let i = 1 ; i < numberCubs+1; i++){
+        let place = document.getElementById('place'+i)
+        place.innerHTML = ''
+    }
+    leftComb = []
+    rightComb = []
+    document.querySelector('#avatar'+userNumber).classList.toggle('user'+userNumber)
+    chancesCounter = 0
+        if(userNumber === 1){
+            userNumber = 2
+            document.querySelector('#avatar'+userNumber).classList.toggle('user'+userNumber)
+        }else{
+            userNumber = 1 
+            document.querySelector('#avatar'+userNumber).classList.toggle('user'+userNumber)
+        }
+    counterStep++
+    if(counterStep === numberCubs){
+        if(score1>score2){
+            alert("Користувач виграв")
+        }
+        if(score1===score2){
+            alert("Нічия")
+        }
+        if(score1<score2){
+            alert("Комп'ютер виграв !")
+        }
+    }
+    }else{
+        return
+    }
+   
+}
+
+function addCompScore(){
+    let add1 = 0, add2 = 0
+    let max1 = 0, max2  = 0
+    for(let i =0; i < numberCubs; i ++){
+       if(compUsed[i] === false && document.getElementById('right1').innerHTML*1 > max1) {add1=1; max1=document.getElementById('right1').innerHTML*1}
+       if(compUsed[i]  === false && document.getElementById('right2').innerHTML*1 > max1) {add1=2; max1=document.getElementById('right2').innerHTML*1}
+       if(compUsed[i]  === false && document.getElementById('right3').innerHTML*1 > max1) {add1=3; max1=document.getElementById('right3').innerHTML*1}
+       if(compUsed[i]  === false && document.getElementById('right4').innerHTML*1 > max1) {add1=4; max1=document.getElementById('right4').innerHTML*1}
+       if(compUsed[i]  === false && document.getElementById('right5').innerHTML*1 > max1) {add1=5; max1=document.getElementById('right5').innerHTML*1}
+       if(compUsed[i]  === false && document.getElementById('right6').innerHTML*1 > max1) {add1=6; max1=document.getElementById('right6').innerHTML*1}
+       if(compUsed[i]  === false && document.getElementById('rightSmall').innerHTML*1 > max1) {add1=7; max1=document.getElementById('rightSmall').innerHTML*1}
+       if(compUsed[i]  === false && document.getElementById('rightBig').innerHTML*1 > max1) {add1=8; max1=document.getElementById('rightBig').innerHTML*1}
+       if(compUsed[i] === false && document.getElementById('rightF').innerHTML*1 > max1) {add1=9;  max1=document.getElementById('rightF').innerHTML*1}
+       if(compUsed[i]  === false && document.getElementById('rightLike').innerHTML*1 > max1) {add1=10; max1=document.getElementById('rightLike').innerHTML*1}
+       score2 = score2+max1
+       document.getElementById('suma2').innerHTML = ''
+       document.getElementById('suma2').innerHTML = score2
+       document.querySelector('#comb2'+add1).classList.add('red')
+       compUsed[add1*1-1] = true
+       if(compUsed[i]  === false && document.getElementById('right11').innerHTML*1 > max2) {add2=1; max2=document.getElementById('right11').innerHTML*1}
+       if(compUsed[i]  === false && document.getElementById('right22').innerHTML*1 > max2) {add2=2;max2=document.getElementById('right22').innerHTML*1}
+       if(compUsed[i]  === false && document.getElementById('right33').innerHTML*1 > max2) {add2=3;max2=document.getElementById('right33').innerHTML*1}
+       if(compUsed[i]  === false && document.getElementById('right44').innerHTML*1 > max2) {add2=4; max2=document.getElementById('right44').innerHTML*1}
+       if(compUsed[i]  === false && document.getElementById('right55').innerHTML*1 > max2) {add2=5; max2=document.getElementById('right55').innerHTML*1}
+       if(compUsed[i]  === false && document.getElementById('right66').innerHTML*1 > max2) {add2=6; max2=document.getElementById('right66').innerHTML*1}
+       if(compUsed[i]  === false && document.getElementById('rightSmallSmall').innerHTML*1 > max2) {add2=7; max2=document.getElementById('rightSmallSmall').innerHTML*1}
+       if(compUsed[i]  === false && document.getElementById('rightBigBig').innerHTML*1 > max2) {add2=8;max2=document.getElementById('rightBigBig').innerHTML*1}
+       if(compUsed[i]  === false && document.getElementById('rightFF').innerHTML*1 > max2) {add2=9;max2=document.getElementById('rightFF').innerHTML*1}
+       if(compUsed[i]  === false && document.getElementById('rightLikeLike').innerHTML*1 > max2) {add2=10;max2=document.getElementById('rightLikeLike').innerHTML*1}
+       compUsed[add2*1-1] = true
+       score2 = score2+max2
+       document.getElementById('suma2').innerHTML = ''
+       document.getElementById('suma2').innerHTML = score2
+       document.querySelector('#comb2'+add2).classList.add('red')
+    }
+}
+
+function clearComp(){
+        for(let j =0; j < numberCubs; j++){
+            let a = j +1
+            document.getElementById('cub'+a).innerHTML = ''
+          }
+}
+
+function renderComp(){
+    console.log("hhhhh")
+      for(let j =0; j < numberCubs/2; j++){
+        let a = j +1
+        document.getElementById('place'+a).innerHTML = '<img  src="./image/cub'+leftComb[j]+'.png" style="width: 46px;">'
+      }
+      for(let j =0; j<numberCubs/2; j++){
+        let a = j +1 + numberCubs/2
+        document.getElementById('place'+a).innerHTML = '<img  src="./image/cub'+rightComb[j]+'.png" style="width: 46px;">'
+      }
+    
+}
+
+function randomGroup(){
+    for(let i =0 ; i < numberCubs/2; i++){
+        leftComb.push(setCubs[i])
+    }
+    for(let i =numberCubs/2 ; i < numberCubs; i++){
+        rightComb.push(setCubs[i])
+    }
+}
+
+function groupingForComp(){
+    const number = 5
+    let counter = 0
+    letGroup()
+    if(evalBigForTen() === true){
+        groupForBig()
+        return
+    }
+    if(evalLikeForTen() === true){
+       groupForLike()
+       return
+    }
+    if(evalFullForTen() === true){
+        groupForFull()
+       return
+    }
+    if(evalSmallForTen()=== true){ 
+       groupForSmall()
+       return
+    }
+}
+
+function groupForBig(){
+    for(let i =0; i<numberCubs; i++){
+        if(setCubs[i]===2 && groupStatus[i]===false){
+           leftComb.push(setCubs[i])
+           groupStatus[i]=true
+           break
+        }
+    }
+    
+    for(let i =0; i<numberCubs; i++){
+        if(setCubs[i]===3 && groupStatus[i]===false){
+           leftComb.push(setCubs[i])
+           groupStatus[i]=true
+           break
+        }
+    }
+    console.log("len")
+    console.log(leftComb.length)
+    console.log("len")
+    for(let i =0; i<numberCubs; i++){
+        if(setCubs[i]===4 && groupStatus[i]===false){
+           leftComb.push(setCubs[i])
+           groupStatus[i]=true
+           break
+        }
+    }
+    for(let i =0; i<numberCubs; i++){
+        if(setCubs[i]===5 && groupStatus[i]===false){
+           leftComb.push(setCubs[i])
+           groupStatus[i]=true
+           break
+        }
+    }
+    for(let i =0; i<numberCubs; i++){
+        if(setCubs[i]===6 && groupStatus[i]===false){
+           leftComb.push(setCubs[i])
+           groupStatus[i]=true
+           break
+        }
+    }
+    for(let i =0; i<numberCubs; i++){
+        if( groupStatus[i]===false){
+           rightComb.push(setCubs[i])
+           groupStatus[i]=true
+        }
+    }
+   
+}
+
+function groupForSmall(){
+    for(let i =0; i<numberCubs; i++){
+        if(setCubs[i]===2 && groupStatus[i]===false){
+           leftComb.push(setCubs[i])
+           groupStatus[i]=true
+           break
+        }
+    }
+    for(let i =0; i<numberCubs; i++){
+        if(setCubs[i]===3 && groupStatus[i]===false){
+           leftComb.push(setCubs[i])
+           groupStatus[i]=true
+           break
+        }
+    }
+    for(let i =0; i<numberCubs; i++){
+        if(setCubs[i]===4 && groupStatus[i]===false){
+           leftComb.push(setCubs[i])
+           groupStatus[i]=true
+           break
+        }
+    }
+    for(let i =0; i<numberCubs; i++){
+        if(setCubs[i]===5 && groupStatus[i]===false){
+           leftComb.push(setCubs[i])
+           groupStatus[i]=true
+           break
+        }
+    }
+    for(let i =0; i<numberCubs; i++){
+        if(setCubs[i]===1 && groupStatus[i]===false){
+           leftComb.push(setCubs[i])
+           groupStatus[i]=true
+           break
+        }
+    }
+    for(let i =0; i<numberCubs; i++){
+        if( groupStatus[i]===false){
+           rightComb.push(setCubs[i])
+           groupStatus[i]=true
+        }
+    }
+   
+}
+
+function groupForLike(){
+    let count = 0
+    let like = 0
+    let one=0, two=0, three=0, four=0, five=0, six=0
+    for(let i =0; i <numberCubs; i++){
+        if(setCubs[i]===1) one++
+        if(setCubs[i]===2) two++
+        if(setCubs[i]===3) three++
+        if(setCubs[i]===4) four++
+        if(setCubs[i]===5) five++
+        if(setCubs[i]===6) six++
+    }
+    if(one>=5) like=1
+    if(two>=5) like=2
+    if(three>=5) like=3
+    if(four>=5) like=4
+    if(five>=5) like=5
+    if(six>=5) like=6
+    for(let i =0; i <numberCubs; i ++){
+        if(count<5&&setCubs[i]===like){
+             leftComb.push(setCubs[i])
+             groupStatus[i] = true
+             count++
+        }
+    }
+    for(let i =0; i<numberCubs; i++){
+        if( groupStatus[i]===false){
+           rightComb.push(setCubs[i])
+           groupStatus[i]=true
+        }
+    }
+}
+
+function groupForFull(){
+    let count1 = 0, count2 =0
+    let like1 = null, like2 = null 
+    let one=0, two=0, three=0, four=0, five=0, six=0
+    for(let i =0; i <numberCubs; i++){
+        if(setCubs[i]===1) one++
+        if(setCubs[i]===2) two++
+        if(setCubs[i]===3) three++
+        if(setCubs[i]===4) four++
+        if(setCubs[i]===5) five++
+        if(setCubs[i]===6) six++
+    }
+    if(one>=3)like1=1
+    if(two>=3)like1=2
+    if(three>=3)like1=3
+    if(four>=3)like1=4
+    if(five>=3)like1=5
+    if(six>=3)like1=6
+    if(one>=2&&like1!=1)like2=1
+    if(two>=2&&like1!=2)like2=2
+    if(three>=2&&like1!=3)like2=3
+    if(four>=2&&like1!=4)like2=4
+    if(five>=2&&like1!=5)like2=5
+    if(six>=2&&like1!=6)like2=6
+    for(let i =0; i <numberCubs; i ++){
+        if(count1<3&&like1===setCubs[i]){
+             leftComb.push(setCubs[i])
+             groupStatus[i] = true
+             count1++
+        }
+    }
+    for(let i =0; i <numberCubs; i ++){
+        if(count2<2&&like2===setCubs[i]){
+             leftComb.push(setCubs[i])
+             groupStatus[i] = true
+             count2++
+        }
+    }
+    for(let i =0; i<numberCubs; i++){
+        if( groupStatus[i]===false){
+           rightComb.push(setCubs[i])
+           groupStatus[i]=true
+        }
+    }
+}
+
+function sleep(ms) {
+    return new Promise(resolve => setTimeout(resolve, ms));
+  }
+  
+  
